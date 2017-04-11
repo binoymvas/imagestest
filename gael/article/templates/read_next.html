@@ -1,0 +1,39 @@
+<script type="text/javascript" language="javascript">
+	$(function() {
+		//  Scrolled by user interaction
+		$('#controles').carouFredSel({
+			auto : false,
+			prev : '#prev2',
+			next : '#next2',
+			pagination : "#pager2",
+			mousewheel : true,
+			swipe : {
+				onMouse : true,
+				onTouch : true
+			}
+		});
+	});
+</script>
+<div id="next_read">
+    <div class="list_carousel">
+        <div class="control">
+            <div id="next-title">What to Read Next</div>
+            
+            <div id="controls">
+                <a id="prev2" class="prev" href="#">&lt;</a> <a
+                    id="next2" class="next" href="#">&gt;</a>
+            </div>
+        </div>
+        <div id="controles">
+            {% for next_item in next_read %}
+            <div class="read-items">
+                <span class="read-img">
+                    <img src="https://216d72aca007988f34d7-7c4f8fef8f0aad53b9488757bc3dab78.ssl.cf5.rackcdn.com/sentry-fire.png" width="150" height="150" /></span> 
+                    <span class="read-title">{{next_item.title|title}}</span>
+            </div>
+            {% empty %}
+                <div>No Item yet.</div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
