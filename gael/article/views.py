@@ -49,13 +49,15 @@ class ArticleCategoryViewSet(viewsets.ModelViewSet):
     serializer_class = ArticleCategorySerializer
     
 def ArticleList(request):
-    response = client.get(APIURL  + '/articles/?format=json')
+    import requests
+    response = requests.get(APIURL  + '/articles/?format=json')
+    print response.content,"aaaaaaaaa"
     parser = json.loads(response.content)
     preview_article = random_article(parser)
     print APIURL  + '/articles/?format=json'
     next_read = read_next()
      
-    return render_to_response('article/article_list.html', {'articlelist':parser, 'preview_article': preview_article, 'next_read': next_read}, RequestContext(request))
+    return render(request, 'article/article_list.html', {'articlelist':parser, 'preview_article': preview_article, 'next_read': next_read})
     
 def ArticleDetail(request, id):
     response = client.get(APIURL  + '/articles/' + id + '/?format=json')
@@ -68,9 +70,6 @@ def random_article(article):
     print "#######################################################" 
     article_number = random.randint(0,len(article))
     article_number = int(article_number) - 1 
-    print article_number
-    print article[article_number]
-    return article[article_number]
     print "#######################################################222"
     
 
